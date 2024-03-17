@@ -10,11 +10,13 @@ const initialState = {
   error: '',
 };
 
-export const createUser = createAsyncThunk('userSlice/createUser',
+export const createUser = createAsyncThunk(
+  'userSlice/createUser',
   async ({ email, password, name }) => {
     console.log(email, password, name);
 
     const data = await createUserWithEmailAndPassword(auth, email, password);
+
     await updateProfile(auth.currentUser, {
       displayName: name
     })
@@ -50,7 +52,7 @@ const userSlice = createSlice({
       })
       .addCase(createUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.isError = false;
+        state.isError = true;
         state.email = "";
         state.name = "";
         state.error = action.error.message;
