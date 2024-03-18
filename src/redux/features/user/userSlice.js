@@ -37,9 +37,17 @@ const userSlice = createSlice({
       state.name = payload.name;
       state.email = payload.email;
     },
-    toggleLoading: (state, {payload}) => {
+    toggleLoading: (state, { payload }) => {
       state.isLoading = payload
-    }
+    },
+    logout: (state) => {
+      state.name = '';
+      state.email = '';
+      // state.isLoading = true;
+      state.isError = false;
+      state.error = '';
+
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -68,5 +76,5 @@ const userSlice = createSlice({
   }
 });
 
-export const { setUser, toggleLoading } = userSlice.actions;
+export const { setUser, toggleLoading, logout } = userSlice.actions;
 export default userSlice.reducer;
