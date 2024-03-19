@@ -1,37 +1,35 @@
-import { ArrowRightIcon, TrashIcon } from '@heroicons/react/24/outline';
-import { useDispatch } from 'react-redux';
-import {
+import { ArrowRightIcon, TrashIcon } from "@heroicons/react/24/outline";
+// import { useDispatch } from 'react-redux';
+/* import {
   removeTask,
   updateStatus,
-} from '../../redux/features/tasks/tasksSlice';
-import { useUpdateTaskMutation } from '../../redux/features/api/baseApi';
+} from '../../redux/features/tasks/tasksSlice'; */
+import { useUpdateTaskMutation } from "../../redux/features/api/baseApi";
 
 const TaskCard = ({ task }) => {
   // const dispatch = useDispatch();
 
-  const [ updateTask, {data, error}] = useUpdateTaskMutation()
+  const [updateTask, { data, error }] = useUpdateTaskMutation();
 
   console.log(data);
   console.log(error);
   let updatedStatus;
 
-  if (task.status === 'pending') {
-    updatedStatus = 'running';
-  } else if (task.status === 'running') {
-    updatedStatus = 'done';
+  if (task.status === "pending") {
+    updatedStatus = "running";
+  } else if (task.status === "running") {
+    updatedStatus = "done";
   } else {
-    updatedStatus = 'archive';
+    updatedStatus = "archive";
   }
-
-
 
   return (
     <div className="bg-secondary/10 rounded-md p-5">
       <h1
         className={`text-lg font-semibold mb-3 ${
-          task.priority === 'high' ? 'text-red-500' : ' '
-        } ${task.priority === 'medium' ? 'text-yellow-500' : ' '} ${
-          task.priority === 'low' ? 'text-green-500' : ' '
+          task.priority === "high" ? "text-red-500" : " "
+        } ${task.priority === "medium" ? "text-yellow-500" : " "} ${
+          task.priority === "low" ? "text-green-500" : " "
         }`}
       >
         {task?.title}
@@ -46,7 +44,7 @@ const TaskCard = ({ task }) => {
           </button>
           <button
             onClick={() =>
-              updateTask({ id: task?._id, data: {status: updatedStatus} })
+              updateTask({ id: task?._id, data: { status: updatedStatus } })
             }
             title="Update Status"
           >

@@ -11,7 +11,11 @@ const Tasks = () => {
   const [isOpen, setIsOpen] = useState(false);
   // const { tasks } = useSelector((state) => state.tasksSlice);
 
-  const { data: tasks, isLoading } = useGetTaskQuery();
+  const { data: tasks, isLoading } = useGetTaskQuery(undefined, {
+    pollingInterval: 30000,
+    refetchOnMountOrArgChange: true,
+  });
+
   const pendingTasks = tasks?.filter((item) => item.status == "pending");
   const runningTasks = tasks?.filter((item) => item.status == "running");
   const doneTasks = tasks?.filter((item) => item.status == "done");
